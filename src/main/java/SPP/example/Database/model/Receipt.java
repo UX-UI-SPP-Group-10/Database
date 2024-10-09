@@ -21,6 +21,7 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long receiptId;
 
+
     @ManyToOne
     @JsonBackReference
     private Buyer buyer;

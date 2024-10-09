@@ -20,7 +20,6 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long compId;
-
     private String compName;
 
     @OneToMany(mappedBy = "company")

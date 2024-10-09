@@ -20,7 +20,6 @@ public class Buyer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buyId;
-
     private String buyName;
 
     @OneToMany(mappedBy = "buyer")
