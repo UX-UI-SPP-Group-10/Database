@@ -1,4 +1,4 @@
-package SPP.example.Database.model;
+package appBackend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

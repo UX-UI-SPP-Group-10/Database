@@ -1,4 +1,4 @@
-package SPP.example.Database;
+package appBackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

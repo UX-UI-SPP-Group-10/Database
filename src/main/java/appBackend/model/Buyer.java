@@ -1,5 +1,4 @@
-package SPP.example.Database.model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+package appBackend.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,25 +9,20 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "receipt")
+@Table(name = "buyer")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Receipt {
+public class Buyer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long receiptId;
+    private Long buyId;
+    private String buyName;
 
-
-    @ManyToOne
-    @JsonBackReference
-    private Buyer buyer;
-
-    @OneToOne
-    @JsonBackReference
-    private Item item;
-
+    @OneToMany(mappedBy = "buyer")
+    @JsonManagedReference
+    private List<Receipt> receipts;
 }
 
