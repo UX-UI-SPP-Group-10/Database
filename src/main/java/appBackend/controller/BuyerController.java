@@ -17,11 +17,14 @@ public class BuyerController {
 
     @GetMapping
     public List<Buyer> getAllBuyers() {
-        return buyerService.getAllBuyers();
+        List<Buyer> buyers = buyerService.getAllBuyers();
+        System.out.println("Fetched buyers: " + buyers);
+        return buyers;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Buyer> getBuyerById(@PathVariable Long id) {
+        System.out.println("Fetching buyer with ID: " + id);
         Buyer buyer = buyerService.getBuyerById(id);
         if (buyer != null) {
             return ResponseEntity.ok(buyer);
@@ -33,11 +36,13 @@ public class BuyerController {
     @PostMapping
     public ResponseEntity<Buyer> createBuyer(@RequestBody Buyer buyer) {
         Buyer createdBuyer = buyerService.createBuyer(buyer);
+        System.out.println("Created buyer: " + createdBuyer);
         return ResponseEntity.ok(createdBuyer);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBuyer(@PathVariable Long id) {
+        System.out.println("Deleting buyer with ID: " + id);
         buyerService.deleteBuyer(id);
         return ResponseEntity.noContent().build();
     }
