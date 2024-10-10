@@ -21,9 +21,10 @@ public class Company {
     private Long compId;
     private String compName;
 
+    /*
     @OneToMany(mappedBy = "company")
     @JsonManagedReference
     private List<Item> items;
-
+     */
 }
 
