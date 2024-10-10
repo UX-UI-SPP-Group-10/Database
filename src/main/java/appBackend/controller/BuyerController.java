@@ -31,8 +31,9 @@ public class BuyerController {
     }
 
     @PostMapping
-    public Buyer createBuyer(@RequestBody Buyer buyer) {
-        return buyerService.createBuyer(buyer);
+    public ResponseEntity<Buyer> createBuyer(@RequestBody Buyer buyer) {
+        Buyer createdBuyer = buyerService.createBuyer(buyer);
+        return ResponseEntity.ok(createdBuyer);
     }
 
     @DeleteMapping("/{id}")
