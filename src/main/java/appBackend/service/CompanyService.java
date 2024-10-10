@@ -1,6 +1,5 @@
 package appBackend.service;
 
-import appBackend.model.Buyer;
 import appBackend.model.Company;
 import appBackend.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
