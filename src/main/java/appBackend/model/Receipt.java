@@ -20,11 +20,11 @@ public class Receipt {
 
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "buyer-receipts")
     private Buyer buyer;
 
     @OneToOne
-    @JsonBackReference
+    @JsonBackReference(value = "item-receipt")
     private Item item;
 
 }

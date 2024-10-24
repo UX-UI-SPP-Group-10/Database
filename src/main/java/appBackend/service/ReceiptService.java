@@ -3,7 +3,6 @@ package appBackend.service;
 import appBackend.model.Receipt;
 import appBackend.repository.ReceiptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,19 +23,13 @@ public class ReceiptService {
 
     public Receipt createReceipt(Receipt receipt) {
         return receiptRepository.save(receipt);
-    }   
+    }
 
     public void deleteReceipt(Long id) {
         receiptRepository.deleteById(id);
     }
-    
-    public List<Receipt> getReceiptsByBuyerId(Long buyerId) {
-        return receiptRepository.findByBuyerId(buyerId);
-    }
-    public interface ReceiptRepository extends JpaRepository<Receipt, Long> {
-
-    List<Receipt> findByBuyerId(Long buyerId);
-
-}
-    
+/* 
+    public List<Receipt> getReceiptsByBuyId(Long buyerId) {
+        return receiptRepository.findByBuyer_BuyId(buyerId); // Updated method name
+    }*/
 }

@@ -1,7 +1,10 @@
 package appBackend.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -11,17 +14,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+
 public class Buyer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long buyId;
+    private Long buyId;   
     private String buyName;
 
     
     @OneToMany(mappedBy = "buyer")
-    @JsonManagedReference
+    @JsonManagedReference(value = "buyer-receipts")
     private List<Receipt> receipts;
     
 }
