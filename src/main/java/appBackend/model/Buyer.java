@@ -19,10 +19,10 @@ public class Buyer {
     private Long buyId;
     private String buyName;
 
-    /*
+    
     @OneToMany(mappedBy = "buyer")
     @JsonManagedReference
     private List<Receipt> receipts;
-    */
+    
 }
 
