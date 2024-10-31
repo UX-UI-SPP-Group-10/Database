@@ -31,5 +31,6 @@ public class ReceiptService {
 /* 
     public List<Receipt> getReceiptsByBuyId(Long buyerId) {
         return receiptRepository.findByBuyer_BuyId(buyerId); // Updated method name
-    }*/
+    }
+*/
 }
