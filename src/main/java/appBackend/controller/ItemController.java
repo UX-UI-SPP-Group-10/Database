@@ -17,6 +17,12 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @PostMapping("/company/{compId}")
+    public ResponseEntity<Item> addItemToCompany(@PathVariable("compId") Long compId, @RequestBody Item item) {
+        Item createdItem = itemService.addItemToCompany(compId, item);
+        return ResponseEntity.ok(createdItem);
+    }
+
     @GetMapping
     public List<Item> getAllItems(){
         return itemService.getAllItems();
@@ -30,12 +36,6 @@ public class ItemController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    @PostMapping
-    public ResponseEntity<Item> createItem(@RequestBody Item item) {
-        Item createdItem = itemService.createItem(item);
-        return ResponseEntity.ok(createdItem);
     }
 
     @DeleteMapping("/{id}")
