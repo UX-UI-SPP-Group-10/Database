@@ -40,4 +40,8 @@ public class ItemService {
         item.setCompany(company);
         return itemRepository.save(item);
     }
+
+    public List<Item> getItemsByCompanyId(Long compId) {
+        return itemRepository.findByCompany_CompId(compId);
+    }
 }
