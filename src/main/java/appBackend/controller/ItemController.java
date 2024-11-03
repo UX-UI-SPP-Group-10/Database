@@ -19,12 +19,14 @@ public class ItemController {
 
     @PostMapping("/company/{compId}")
     public ResponseEntity<Item> addItemToCompany(@PathVariable("compId") Long compId, @RequestBody Item item) {
+        System.out.println("Received request to add item with company ID: " + compId);
         Item createdItem = itemService.addItemToCompany(compId, item);
         return ResponseEntity.ok(createdItem);
     }
 
     @GetMapping
     public List<Item> getAllItems(){
+        System.out.println("Received request to get all items");
         return itemService.getAllItems();
     }
     
