@@ -45,4 +45,9 @@ public class ItemController {
         itemService.deleteItem(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/company/{compId}")
+    public List<Item> getItemsByCompanyId(@PathVariable Long compId) {
+        return itemService.getItemsByCompanyId(compId);
+    }
 }
