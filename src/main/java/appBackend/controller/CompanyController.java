@@ -33,6 +33,7 @@ public class CompanyController {
     @PostMapping
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {
         Company createdCompany = companyService.createCompany(company);
+        System.out.println("Created Company: " + createdCompany);
         return ResponseEntity.ok(createdCompany);
     }
 
