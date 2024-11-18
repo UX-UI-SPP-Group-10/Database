@@ -1,5 +1,7 @@
 package appBackend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +26,7 @@ public class Receipt {
     private Buyer buyer;
 
     @OneToOne
-    @JsonBackReference(value = "item-receipt")
+    @JsonManagedReference(value = "item-receipt")
     private Item item;
 
 }

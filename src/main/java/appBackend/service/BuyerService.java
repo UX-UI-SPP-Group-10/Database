@@ -18,6 +18,7 @@ public class BuyerService {
     }
 
     public Buyer getBuyerById(Long id) {
+        System.out.println("Fectching Buyer with id: " + id);
         return buyerRepository.findById(id).orElse(null);
     }
 
