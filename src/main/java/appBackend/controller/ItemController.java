@@ -17,9 +17,9 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @PostMapping
-    public ResponseEntity<Item> createItem(@RequestBody Item item) {
-        Item createdItem = itemService.createItem(item);
+    @PostMapping("/company/{compId}")
+    public ResponseEntity<Item> createItem(@PathVariable Long compId, @RequestBody Item item) {
+        Item createdItem = itemService.addItemToCompany(compId, item);
         return ResponseEntity.ok(createdItem);
     }
 
