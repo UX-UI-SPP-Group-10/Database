@@ -31,30 +31,22 @@ public class ReceiptService {
     }
 
     public Receipt createReceipt(Receipt receipt) {
+        // Fetch buyer and item by ID
+        Buyer buyer = buyerRepository.findById(receipt.getBuyer().getBuyerId())
+                .orElseThrow(() -> new RuntimeException("Buyer not found with ID: " + receipt.getBuyer().getBuyerId()));
+
+        Item item = itemRepository.findById(receipt.getItem().getItemId())
+                .orElseThrow(() -> new RuntimeException("Item not found with ID: " + receipt.getItem().getItemId()));
+
+        // Set buyer and item to the receipt
+        receipt.setBuyer(buyer);
+        receipt.setItem(item);
+
+        // Save and return the receipt
         return receiptRepository.save(receipt);
-//        try {
-//            System.out.println("Received receipt: " + receipt);
-//
-//            Buyer buyer = buyerRepository.findById(receipt.getBuyer().getBuyId())
-//                    .orElseThrow(() -> new RuntimeException("Buyer not found with ID: " + receipt.getBuyer().getBuyId()));
-//            System.out.println("Fetched buyer: " + buyer);
-//
-//            Item item = itemRepository.findById(receipt.getItem().getItemId())
-//                    .orElseThrow(() -> new RuntimeException("Item not found with ID: " + receipt.getItem().getItemId()));
-//            System.out.println("Fetched item: " + item);
-//
-//            receipt.setBuyer(buyer);
-//            receipt.setItem(item);
-//
-//            Receipt savedReceipt = receiptRepository.save(receipt);
-//            System.out.println("Saved receipt: " + savedReceipt);
-//            return savedReceipt;
-//        } catch (Exception e) {
-//            System.out.println("Error creating receipt: " + e.getMessage());
-//            throw e;  // or return an appropriate response
-//        }
     }
-    
+
+
 
     public void deleteReceipt(Long id) {
         receiptRepository.deleteById(id);

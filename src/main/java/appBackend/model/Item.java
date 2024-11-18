@@ -1,5 +1,6 @@
 package appBackend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
 @Entity
 @Table(name = "item")
 @Getter
@@ -29,12 +29,9 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
-    @JsonManagedReference(value = "company-items")
-    @JsonIgnoreProperties("items")  // Ignore the 'items' property during deserialization
     private Company company;
 
-
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference(value = "item-receipt")
+    @JsonIgnore
     private List<Receipt> receipts;
 }

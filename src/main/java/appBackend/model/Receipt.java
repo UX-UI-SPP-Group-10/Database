@@ -21,25 +21,12 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long receiptId;
 
-
     @ManyToOne
     @JoinColumn(name = "buyer_id", nullable = false)
-    @JsonManagedReference(value = "buyer-receipts")
     private Buyer buyer;
 
     @ManyToOne
     @JoinColumn(name = "item_id", nullable = false)
-    @JsonManagedReference(value = "item-receipt")
     private Item item;
 
-    //*
-    @ManyToOne
-    @JsonBackReference(value = "buyer-receipts")
-    private Buyer buyer;
-
-    @OneToOne
-    @JsonBackReference(value = "item-receipt")
-    private Item item;
-    *//
 }
-

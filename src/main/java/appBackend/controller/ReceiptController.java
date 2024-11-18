@@ -32,9 +32,18 @@ public class ReceiptController {
 
     @PostMapping
     public ResponseEntity<Receipt> createReceipt(@RequestBody Receipt receipt) {
-        Receipt createdReceipt = receiptService.createReceipt(receipt);
-        return ResponseEntity.ok(createdReceipt);
+        try {
+            // Log incoming data
+            System.out.println("Received receipt: " + receipt);
+
+            Receipt createdReceipt = receiptService.createReceipt(receipt);
+            return ResponseEntity.ok(createdReceipt);
+        } catch (Exception e) {
+            System.err.println("Error creating receipt: " + e.getMessage());
+            return ResponseEntity.status(500).build();  // Return 500 on error
+        }
     }
+
 
     @DeleteMapping
     public ResponseEntity<Void> deleteReceipt(@PathVariable Long id) {

@@ -33,7 +33,7 @@ public class BuyerController {
         }
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping
     public ResponseEntity<Buyer> createBuyer(@RequestBody Buyer buyer) {
         System.out.println("Trying to create buyer: " + buyer);
         Buyer createdBuyer = buyerService.createBuyer(buyer);
