@@ -17,12 +17,12 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @PostMapping("/company/{compId}")
-    public ResponseEntity<Item> addItemToCompany(@PathVariable("compId") Long compId, @RequestBody Item item) {
-        System.out.println("Received request to add item with company ID: " + compId);
-        Item createdItem = itemService.addItemToCompany(compId, item);
+    @PostMapping
+    public ResponseEntity<Item> createItem(@RequestBody Item item) {
+        Item createdItem = itemService.createItem(item);
         return ResponseEntity.ok(createdItem);
     }
+
 
     @GetMapping
     public List<Item> getAllItems(){
