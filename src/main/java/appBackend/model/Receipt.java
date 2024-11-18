@@ -26,7 +26,7 @@ public class Receipt {
     private Buyer buyer;
 
     @OneToOne
-    @JsonManagedReference(value = "item-receipt")
+    @JsonBackReference(value = "item-receipt")
     private Item item;
 
 }
