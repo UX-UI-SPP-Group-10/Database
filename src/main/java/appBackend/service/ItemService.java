@@ -23,6 +23,7 @@ public class ItemService {
     }
 
     public Item getItemById(Long id) {
+        System.out.println("Fectching item with id: " + id);
         return itemRepository.findById(id).orElse(null);
     }
 
