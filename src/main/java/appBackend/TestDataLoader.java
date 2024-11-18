@@ -3,7 +3,6 @@ package appBackend;
 import appBackend.model.Buyer;
 import appBackend.model.Company;
 import appBackend.model.Item;
-import appBackend.model.Receipt;
 import appBackend.service.BuyerService;
 import appBackend.service.CompanyService;
 import appBackend.service.ItemService;
@@ -60,16 +59,9 @@ public class TestDataLoader implements CommandLineRunner {
         buyer2.setBuyerName("Test Buyer 2");
         buyer2 = buyerService.createBuyer(buyer2);
 
-        // Create test receipts
-        Receipt receipt1 = new Receipt();
-        receipt1.setBuyer(buyer1);
-        receipt1.setItem(item1);
-        receiptService.createReceipt(receipt1);
-
-        Receipt receipt2 = new Receipt();
-        receipt2.setBuyer(buyer2);
-        receipt2.setItem(item2);
-        receiptService.createReceipt(receipt2);
+        // Create test receipts using the new receipt setup
+        receiptService.createReceipt(buyer1.getBuyerId(), item1.getItemId());
+        receiptService.createReceipt(buyer2.getBuyerId(), item2.getItemId());
 
         System.out.println("Test data loaded.");
     }

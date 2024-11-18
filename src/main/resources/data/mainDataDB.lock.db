@@ -1,6 +1,6 @@
 #FileLock
-#Mon Nov 18 15:42:16 CET 2024
+#Mon Nov 18 17:30:22 CET 2024
 hostName=KPs_pc.lan
-id=1933fb969c63d88c4fc0f4bf2cda292082e2a826707
+id=193401c6160deb9ad9ba75757af592f0c1b020cc039
 method=file
-server=192.168.1.182\:58891
+server=192.168.1.182\:63119

@@ -16,10 +16,10 @@ public class ReceiptService {
     @Autowired
     private BuyerRepository buyerRepository;
 
-    @Autowired  // Add @Autowired here
+    @Autowired
     private ReceiptRepository receiptRepository;
 
-    @Autowired  // Add @Autowired here
+    @Autowired
     private ItemRepository itemRepository;
 
     public List<Receipt> getAllReceipts() {
@@ -30,31 +30,23 @@ public class ReceiptService {
         return receiptRepository.findById(id).orElse(null);
     }
 
-    public Receipt createReceipt(Receipt receipt) {
-        // Fetch buyer and item by ID
-        Buyer buyer = buyerRepository.findById(receipt.getBuyer().getBuyerId())
-                .orElseThrow(() -> new RuntimeException("Buyer not found with ID: " + receipt.getBuyer().getBuyerId()));
+    public Receipt createReceipt(Long buyerId, Long itemId) {
+        // Fetch buyer and item by ID from the query parameters
+        Buyer buyer = buyerRepository.findById(buyerId)
+                .orElseThrow(() -> new RuntimeException("Buyer not found with ID: " + buyerId));
 
-        Item item = itemRepository.findById(receipt.getItem().getItemId())
-                .orElseThrow(() -> new RuntimeException("Item not found with ID: " + receipt.getItem().getItemId()));
-
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Item not found with ID: " + itemId));
+        Receipt newReceipt = new Receipt();
         // Set buyer and item to the receipt
-        receipt.setBuyer(buyer);
-        receipt.setItem(item);
+        newReceipt.setBuyer(buyer);
+        newReceipt.setItem(item);
 
         // Save and return the receipt
-        return receiptRepository.save(receipt);
+        return receiptRepository.save(newReceipt);
     }
-
-
 
     public void deleteReceipt(Long id) {
         receiptRepository.deleteById(id);
     }
-
-    /*
-    public List<Receipt> getReceiptsByBuyId(Long buyerId) {
-        return receiptRepository.findByBuyer_BuyId(buyerId); // Updated method name
-    }
-*/
 }

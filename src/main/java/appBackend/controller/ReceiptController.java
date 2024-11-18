@@ -31,12 +31,14 @@ public class ReceiptController {
     }
 
     @PostMapping
-    public ResponseEntity<Receipt> createReceipt(@RequestBody Receipt receipt) {
+    public ResponseEntity<Receipt> createReceipt(
+            @RequestParam(required = true) Long buyerId,
+            @RequestParam(required = true) Long itemId) {
         try {
-            // Log incoming data
-            System.out.println("Received receipt: " + receipt);
+            // Log the incoming data
+            System.out.println("Received receipt with buyerId: " + buyerId + " and itemId: " + itemId);
 
-            Receipt createdReceipt = receiptService.createReceipt(receipt);
+            Receipt createdReceipt = receiptService.createReceipt(buyerId, itemId);
             return ResponseEntity.ok(createdReceipt);
         } catch (Exception e) {
             System.err.println("Error creating receipt: " + e.getMessage());
