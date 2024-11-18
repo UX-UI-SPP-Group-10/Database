@@ -1,5 +1,6 @@
 package appBackend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,14 +19,14 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long receiptId;
 
-
     @ManyToOne
-    @JsonBackReference(value = "buyer-receipts")
+    @JoinColumn(name = "buyer_id", nullable = false)
+    @JsonManagedReference(value = "buyer-receipts")
     private Buyer buyer;
 
-    @OneToOne
-    @JsonBackReference(value = "item-receipt")
+    @ManyToOne
+    @JoinColumn(name = "item_id", nullable = false)
+    @JsonManagedReference(value = "item-receipt")
     private Item item;
-
 }
 

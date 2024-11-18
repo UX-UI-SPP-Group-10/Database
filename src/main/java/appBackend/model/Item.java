@@ -1,10 +1,14 @@
 package appBackend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -17,16 +21,20 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
+
     private String itemName;
     private int price;
     private String description;
     private int stock;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name = "company_id", nullable = false)
+    @JsonManagedReference(value = "company-items")
+    @JsonIgnoreProperties("items")  // Ignore the 'items' property during deserialization
     private Company company;
 
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference(value = "item-receipt")
+    private List<Receipt> receipts;
 }
-
-

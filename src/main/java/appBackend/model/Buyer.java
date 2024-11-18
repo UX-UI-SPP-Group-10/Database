@@ -1,4 +1,5 @@
 package appBackend.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,19 +15,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Buyer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long buyId;   
-    private String buyName;
+    private Long buyerId;
 
-    
-    @OneToMany(mappedBy = "buyer")
-    @JsonManagedReference(value = "buyer-receipts")
+    private String buyerName;
+
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference(value = "buyer-receipts")
     private List<Receipt> receipts;
-    
 }
-
- 

@@ -36,12 +36,12 @@ public class ItemService {
 
     public Item addItemToCompany(Long compId, Item item) {
         Company company = companyRepository.findById(compId)
-                            .orElseThrow(() -> new RuntimeException("Company not found"));
+                .orElseThrow(() -> new RuntimeException("Company not found"));
         item.setCompany(company);
         return itemRepository.save(item);
     }
 
     public List<Item> getItemsByCompanyId(Long compId) {
-        return itemRepository.findByCompany_CompId(compId);
+        return itemRepository.findByCompany_CompanyId(compId);
     }
 }
