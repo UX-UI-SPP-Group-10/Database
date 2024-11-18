@@ -29,3 +29,5 @@ replay_pid*
 *.iws
 out/
 target/
+src/main/resources/data/mainDataDB.lock.db
+src/main/resources/data/mainDataDB.mv.db
