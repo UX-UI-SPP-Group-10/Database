@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/items")
@@ -50,4 +51,25 @@ public class ItemController {
     public List<Item> getItemsByCompanyId(@PathVariable Long compId) {
         return itemService.getItemsByCompanyId(compId);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Item> updateItem(@PathVariable Long id, @RequestBody Item updatedItem) {
+        Item existingItem = itemService.getItemById(id);
+        if (existingItem == null) {
+            return ResponseEntity.notFound().build();
+        }
+        updatedItem.setItemId(id);
+        Item savedItem = itemService.updateItem(updatedItem);
+        return ResponseEntity.ok(savedItem);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Item> patchItem(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+        Item updatedItem = itemService.patchItem(id, updates);
+        if (updatedItem == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedItem);
+    }
+
 }

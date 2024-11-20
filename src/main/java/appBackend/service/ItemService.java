@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -27,8 +29,8 @@ public class ItemService {
         return itemRepository.findById(id).orElse(null);
     }
 
-    public Item createItem(Item item) {
-        return itemRepository.save(item);
+    public void createItem(Item item) {
+        itemRepository.save(item);
     }
 
     public void deleteItem(Long id) {
@@ -45,4 +47,66 @@ public class ItemService {
     public List<Item> getItemsByCompanyId(Long compId) {
         return itemRepository.findByCompany_CompanyId(compId);
     }
+    public Item updateItem(Item updatedItem) {
+        // Fetch the existing item from the database
+        Item existingItem = itemRepository.findById(updatedItem.getItemId())
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
+        // Update only mutable fields
+        existingItem.setItemName(updatedItem.getItemName());
+        existingItem.setPrice(updatedItem.getPrice());
+        existingItem.setDescription(updatedItem.getDescription());
+        existingItem.setStock(updatedItem.getStock());
+        existingItem.setCompany(updatedItem.getCompany()); // If company can be updated
+
+        // Save and return the updated item
+        return itemRepository.save(existingItem);
+    }
+
+
+    public Item patchItem(Long id, Map<String, Object> updates) {
+        Optional<Item> optionalItem = itemRepository.findById(id);
+        if (optionalItem.isEmpty()) {
+            return null;
+        }
+        Item item = optionalItem.get();
+
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "itemName":
+                    if (value instanceof String) {
+                        item.setItemName((String) value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid value for itemName");
+                    }
+                    break;
+                case "price":
+                    if (value instanceof Number) { // Handle numbers safely
+                        item.setPrice(((Number) value).intValue());
+                    } else {
+                        throw new IllegalArgumentException("Invalid value for price");
+                    }
+                    break;
+                case "description":
+                    if (value instanceof String) {
+                        item.setDescription((String) value);
+                    } else {
+                        throw new IllegalArgumentException("Invalid value for description");
+                    }
+                    break;
+                case "stock":
+                    if (value instanceof Number) { // Handle numbers safely
+                        item.setStock(((Number) value).intValue());
+                    } else {
+                        throw new IllegalArgumentException("Invalid value for stock");
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid field: " + key);
+            }
+        });
+
+        return itemRepository.save(item);
+    }
+
 }

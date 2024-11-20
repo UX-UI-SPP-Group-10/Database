@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/receipts")
@@ -52,4 +53,35 @@ public class ReceiptController {
         receiptService.deleteReceipt(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Receipt> updateReceipt(@PathVariable Long id, @RequestBody Receipt updatedReceipt) {
+        try {
+            Receipt receipt = receiptService.updateReceipt(id, updatedReceipt);
+            if (receipt != null) {
+                return ResponseEntity.ok(receipt);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            System.err.println("Error updating receipt: " + e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Receipt> patchReceipt(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+        try {
+            Receipt receipt = receiptService.patchReceipt(id, updates);
+            if (receipt != null) {
+                return ResponseEntity.ok(receipt);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            System.err.println("Error patching receipt: " + e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
+    }
+
 }

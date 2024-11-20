@@ -50,6 +50,14 @@ public class TestDataLoader implements CommandLineRunner {
         item2.setCompany(company);
         itemService.createItem(item2);
 
+        Item item3 = new Item();
+        item3.setItemName("Test Item 3 without receipt");
+        item3.setPrice(200);
+        item3.setDescription("Description for Test Item 2");
+        item3.setStock(20);
+        item3.setCompany(company);
+        itemService.createItem(item3);
+
         // Create test buyers
         Buyer buyer1 = new Buyer();
         buyer1.setBuyerName("Test Buyer 1");
