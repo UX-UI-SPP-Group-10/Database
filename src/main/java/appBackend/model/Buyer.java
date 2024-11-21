@@ -21,8 +21,8 @@ public class Buyer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buyerId;
-
     private String buyerName;
+    private String firebaseUid;
 
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
