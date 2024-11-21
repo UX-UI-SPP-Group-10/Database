@@ -33,20 +33,25 @@ public class ReceiptService {
     }
 
     public Receipt createReceipt(Long buyerId, Long itemId) {
-        // Fetch buyer and item by ID from the query parameters
         Buyer buyer = buyerRepository.findById(buyerId)
                 .orElseThrow(() -> new RuntimeException("Buyer not found with ID: " + buyerId));
 
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Item not found with ID: " + itemId));
+
+        if (item.getStock() <= 0) {
+            throw new RuntimeException("Item out of stock with ID: " + itemId);
+        }
+        // Reduce the stock by one
+        item.setStock(item.getStock() - 1);
+        itemRepository.save(item);
+
         Receipt newReceipt = new Receipt();
-        // Set buyer and item to the receipt
         newReceipt.setBuyer(buyer);
         newReceipt.setItem(item);
-
-        // Save and return the receipt
         return receiptRepository.save(newReceipt);
     }
+
 
     public void deleteReceipt(Long id) {
         receiptRepository.deleteById(id);
