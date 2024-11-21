@@ -31,7 +31,7 @@ public class Item {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "item")
     @JsonIgnore
     private List<Receipt> receipts;
 }

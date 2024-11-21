@@ -69,7 +69,7 @@ public class TestDataLoader implements CommandLineRunner {
 
         // Create test receipts using the new receipt setup
         receiptService.createReceipt(buyer1.getBuyerId(), item1.getItemId());
-        receiptService.createReceipt(buyer2.getBuyerId(), item2.getItemId());
+        receiptService.createReceipt(buyer2.getBuyerId(), item1.getItemId());
 
         System.out.println("Test data loaded.");
     }
