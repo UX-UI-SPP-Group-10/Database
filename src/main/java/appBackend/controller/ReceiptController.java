@@ -31,6 +31,11 @@ public class ReceiptController {
         }
     }
 
+    @GetMapping("/buyer/{buyerId}")
+    public List<Receipt> getReceiptsByBuyerId(@PathVariable Long buyerId) {
+        return receiptService.getReceiptsByBuyerId(buyerId);
+    }
+
     @PostMapping
     public ResponseEntity<Receipt> createReceipt(
             @RequestParam(required = true) Long buyerId,

@@ -93,5 +93,9 @@ public class ReceiptService {
                 .orElseThrow(() -> new RuntimeException("Receipt not found with ID: " + id));
     }
 
+    public List<Receipt> getReceiptsByBuyerId(Long buyerId) {
+        return receiptRepository.findByBuyer_BuyerId(buyerId);
+    }
+
 
 }
