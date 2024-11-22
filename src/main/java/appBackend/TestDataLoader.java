@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component    // Use this to load test data
+//@Component    // Use this to load test data
 public class TestDataLoader implements CommandLineRunner {
 
     @Autowired
