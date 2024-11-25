@@ -47,6 +47,7 @@ public class ItemService {
     public List<Item> getItemsByCompanyId(Long compId) {
         return itemRepository.findByCompany_CompanyId(compId);
     }
+
     public Item updateItem(Item updatedItem) {
         // Fetch the existing item from the database
         Item existingItem = itemRepository.findById(updatedItem.getItemId())
@@ -57,11 +58,17 @@ public class ItemService {
         existingItem.setPrice(updatedItem.getPrice());
         existingItem.setDescription(updatedItem.getDescription());
         existingItem.setStock(updatedItem.getStock());
-        existingItem.setCompany(updatedItem.getCompany()); // If company can be updated
+
+        // Retain the existing company association
+        if (existingItem.getCompany() == null) {
+            throw new RuntimeException("Company must be associated with the item");
+        }
+        updatedItem.setCompany(existingItem.getCompany());
 
         // Save and return the updated item
         return itemRepository.save(existingItem);
     }
+
 
 
     public Item patchItem(Long id, Map<String, Object> updates) {

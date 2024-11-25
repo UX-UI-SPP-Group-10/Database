@@ -32,6 +32,17 @@ public class ReceiptService {
         return receiptRepository.findById(id).orElse(null);
     }
 
+    public List<Receipt> getReceiptsByItemId(Long itemId) {
+        // Fetch receipts by the given item ID
+        return receiptRepository.findByItem_ItemId(itemId);
+    }
+
+    public List<Receipt> getReceiptsByCompanyId(Long companyId) {
+        // Fetch receipts for all items belonging to the given company ID
+        return receiptRepository.findByItem_Company_CompanyId(companyId);
+    }
+
+
     public Receipt createReceipt(Long buyerId, Long itemId) {
         Buyer buyer = buyerRepository.findById(buyerId)
                 .orElseThrow(() -> new RuntimeException("Buyer not found with ID: " + buyerId));

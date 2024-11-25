@@ -31,6 +31,18 @@ public class ReceiptController {
         }
     }
 
+    @GetMapping("/item/{itemId}")
+    public List<Receipt> getReceiptsByItemId(@PathVariable Long itemId) {
+        System.out.println("Fetching receipts for item ID: " + itemId);
+        return receiptService.getReceiptsByItemId(itemId);
+    }
+
+    @GetMapping("/company/{companyId}")
+    public List<Receipt> getReceiptsByCompanyId(@PathVariable Long companyId) {
+        System.out.println("Fetching receipts for company ID: " + companyId);
+        return receiptService.getReceiptsByCompanyId(companyId);
+    }
+
     @GetMapping("/buyer/{buyerId}")
     public List<Receipt> getReceiptsByBuyerId(@PathVariable Long buyerId) {
         return receiptService.getReceiptsByBuyerId(buyerId);
